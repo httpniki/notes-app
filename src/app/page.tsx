@@ -18,7 +18,10 @@ export default function Home() {
                <h2 className="text-xl text-white font-bold">
                   Notes
                </h2>
+
+               <CreateNoteButton/>
             </div>
+
             <ul className="flex flex-col gap-2 text-white">
             </ul>
          </section>
