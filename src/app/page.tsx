@@ -1,4 +1,6 @@
 import SearchSVG from "@/components/assets/SearchSVG";
+import CreateNoteButton from "@/components/CreateNoteButton";
+import Notes from "@/components/Notes";
 
 export default function Home() {
    return (
@@ -23,6 +25,7 @@ export default function Home() {
             </div>
 
             <ul className="flex flex-col gap-2 text-white">
+               <Notes/>
             </ul>
          </section>
 
