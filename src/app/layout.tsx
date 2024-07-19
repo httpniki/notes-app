@@ -3,11 +3,12 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import NotesContextProvider from "@/context/NotesContext";
 import React from "react";
+import NotesPreviewSection from "@/components/NotesPreviewSection";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Notes app",
+   title: "Notes",
 };
 
 export default function RootLayout({
@@ -19,7 +20,10 @@ export default function RootLayout({
       <html lang="en">
          <body className={inter.className}>
             <NotesContextProvider>
-               {children}
+               <main className="flex bg-brown w-screen h-screen">
+                  <NotesPreviewSection/>
+                  {children}
+               </main>
             </NotesContextProvider>
          </body>
       </html>
