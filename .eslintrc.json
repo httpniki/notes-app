@@ -8,6 +8,7 @@
      "indent": ["error", 3],
      "react/react-in-jsx-scope": "off",
      "no-unused-vars": "warn",
-     "object-curly-spacing": ["error", "always"]
+     "object-curly-spacing": ["error", "always"],
+     "react-hooks/exhaustive-deps": "off"
   }
 }
