@@ -4,6 +4,7 @@ import "./globals.css";
 import NotesContextProvider from "@/context/NotesContext";
 import React from "react";
 import NotesPreviewSection from "@/components/NotesPreviewSection";
+import NoteSection from "@/components/NoteSection";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,7 +23,10 @@ export default function RootLayout({
             <NotesContextProvider>
                <main className="flex bg-brown w-screen h-screen">
                   <NotesPreviewSection/>
-                  {children}
+
+                  <NoteSection>
+                     {children}
+                  </NoteSection>
                </main>
             </NotesContextProvider>
          </body>
