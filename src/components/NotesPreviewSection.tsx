@@ -4,7 +4,7 @@ import Notes from "./Notes";
 
 export default function NotesPreviewSection() {
    return(
-      <section className="overflow-auto flex flex-col h-full p-4 w-64 border-r gap-4 border-white">
+      <section className="overflow-auto flex flex-col h-screen sticky top-0 p-4 w-64 border-r gap-4 border-white">
          <div className="flex w-full gap-2">
             <SearchSVG/>
 
@@ -17,7 +17,7 @@ export default function NotesPreviewSection() {
 
          <div className="flex justify-between">
             <h2 className="text-xl text-white font-bold">
-                  Notes
+               Notes
             </h2>
 
             <CreateNoteButton/>
