@@ -14,6 +14,7 @@ interface ContextValue {
 interface ContextProps {
    children: React.ReactNode
 }
+import { v4 as uuid } from 'uuid'
 
 export const notesContext = React.createContext<ContextValue | null>(null) 
 
@@ -26,7 +27,7 @@ export default function NotesContextProvider({ children }: ContextProps) {
    },[])
    function createNote() {
       const newNote: Note = {
-         id: notes.length + 1,
+         id: uuid(),
          title: {
             content: '',
             emoji: '📝'
