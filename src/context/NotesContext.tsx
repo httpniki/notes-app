@@ -42,12 +42,28 @@ export default function NotesContextProvider({ children }: ContextProps) {
       return note[0]
    }
 
+   function updateNote(id: Note['id'] | Note['title']['content'], fields: UpdateNoteFields) {
+      const note = notes.filter(el => 
+         (el.id === id) ||
+         (el.title.content === id)
+      )[0]
+
+      note.title.content = fields.title?.content ?? note.title.content
+      note.title.emoji = fields.title?.emoji ?? note.title.emoji
+      note.content = fields.content ?? note.content
+
+      saveNote(note)
+      const updatedNotes = getNotes()
+      setNotes(updatedNotes)
+   }
+
    return(
       <notesContext.Provider 
          value={{
             notes,
             createNote,
-            getNote
+            getNote,
+            updateNote
          }}>
          {children}
       </notesContext.Provider>
