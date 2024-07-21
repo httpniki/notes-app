@@ -1,8 +1,8 @@
 import SearchSVG from "./assets/SearchSVG";
-import CreateNoteButton from "./CreateNoteButton";
-import Notes from "./Notes";
+import CreateNoteButton from "./items/CreateNoteButton";
+import RenderNotes from "./items/RenderNotes";
 
-export default function NotesPreviewSection() {
+export default function NotesItemsSection() {
    return(
       <section className="overflow-auto flex flex-col h-screen sticky top-0 p-4 w-64 border-r gap-4 border-white">
          <div className="flex w-full gap-2">
@@ -24,7 +24,7 @@ export default function NotesPreviewSection() {
          </div>
 
          <ul className="flex flex-col gap-2 text-white">
-            <Notes/>
+            <RenderNotes/>
          </ul>
       </section>
    )

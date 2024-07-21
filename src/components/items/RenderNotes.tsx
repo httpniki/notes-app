@@ -3,7 +3,7 @@
 import useNotes from "@/hooks/useNotes"
 import NoteItem from "./NoteItem"
 
-export default function Notes() {
+export default function RenderNotes() {
    const { notes } = useNotes()
 
    return(

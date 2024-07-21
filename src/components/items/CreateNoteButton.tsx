@@ -1,7 +1,7 @@
 'use client'
 
 import useNotes from "@/hooks/useNotes"
-import CreateNoteSVG from "./assets/CreateNoteSVG"
+import CreateNoteSVG from "@/components/assets/CreateNoteSVG"
 
 export default function CreateNoteButton() {
    const { createNote } = useNotes()
