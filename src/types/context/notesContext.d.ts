@@ -9,7 +9,7 @@ export interface UpdateNoteFields {
    content?: string
 }
 
-interface FilteredNotes {
+export interface FilteredNotesByElapsedTime {
    today: Note[]
    yesterday: Note[]
    previous7Days: Note[]
@@ -18,7 +18,7 @@ interface FilteredNotes {
 }
 
 export interface ContextValue {
-   notes: FilteredNotes
+   notes: FilteredNotesByElapsedTime
    createNote: () => void
    getNote: (id: Note['id'] | Note['title']['content']) => Note | null
    updateNote: (id: Note['id'] | Note['title']['content'], fields: UpdateNoteFields) => void
