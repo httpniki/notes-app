@@ -1,6 +1,6 @@
 import SearchSVG from "./assets/SearchSVG";
 import CreateNoteButton from "./items/CreateNoteButton";
-import RenderNotes from "./items/RenderNotes";
+import Notes from "./items/Notes";
 
 export default function NotesItemsSection() {
    return(
@@ -24,7 +24,7 @@ export default function NotesItemsSection() {
          </div>
 
          <ul className="flex flex-col gap-2 text-white">
-            <RenderNotes/>
+            <Notes/>
          </ul>
       </section>
    )

@@ -1,9 +1,9 @@
-import { Note } from "@/types/note"
+import { Note as NoteType } from "@/types/note"
 import Link from "next/link"
 
-interface Props extends Note {}
+interface Props extends NoteType {}
 
-export default function NoteItem({ id, title, content, createAt }: Props) {
+export default function Note({ id, title, content, createAt }: Props) {
    const date = new Date(createAt).toLocaleDateString()
    const href = `/note-${id}`
 
