@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
 import NoteTitle from "./NoteTitle"
 import { UpdateNoteFields } from "@/types/context/notesContext"
+import createNoteDate from "@/lib/createNoteDate"
 
 export default function Note() {
    const path = usePathname()
@@ -16,7 +17,7 @@ export default function Note() {
       if(!notes) return
       const notePathID = path.split('/note-')[1] 
       const note = getNote(notePathID)
-
+   
       setNote(note)
    },[notes])
 
@@ -29,7 +30,9 @@ export default function Note() {
          {(note) && 
             <>
                <p className="text-gray-300 text-center text-xs">
-                  {note.createAt}
+                  {
+                     createNoteDate(note.createAt)
+                  }
                </p>
 
                <NoteTitle
@@ -42,6 +45,7 @@ export default function Note() {
                   className="bg-brown overflow-clip text-sm flex-1 mt-4 text-white focus:outline-none"
                   placeholder="Start writing..."
                   onChange={({ target }) => handleUpdateNote({ content: target.value })}
+                  defaultValue={note.content}
                />
             </>
          }

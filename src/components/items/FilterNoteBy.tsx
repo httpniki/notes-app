@@ -11,9 +11,9 @@ export default function FilterNoteBy({ title, notes }: Props) {
       <>
          { (!!notes.length) && 
             <li>
-               <p className="text-xs">{title}</p>        
+               <p className="mb-1 px-1 mt-2 text-xs flex font-bold text-gray-200">{title}</p>        
 
-               <ul>
+               <ul className="flex flex-col gap-1">
                   {
                      notes.map(note => {
                         return <Note
