@@ -2,12 +2,13 @@
 
 import useNotes from "@/hooks/useNotes"
 import FilterNoteBy from "./FilterNoteBy"
+import NotesMenuProvider from "@/context/NotesMenuContext"
 
 export default function Notes() {
    const { notes } = useNotes()
    
    return(
-      <>
+      <NotesMenuProvider>
          <FilterNoteBy 
             title="Today"
             notes={notes.today}
@@ -32,6 +33,6 @@ export default function Notes() {
             title="Older"
             notes={notes.older}
          />        
-      </>
+      </NotesMenuProvider>
    )
 }

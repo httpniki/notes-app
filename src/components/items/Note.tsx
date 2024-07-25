@@ -1,18 +1,29 @@
 import { Note as NoteType } from "@/types/note"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { useRef } from "react"
+import NotesPopup from "./NotesMenu"
+import RenderModal from "./RenderModal"
+import useNotesPopup from "@/hooks/useNotesMenu"
 
 interface Props extends NoteType {}
 
 export default function Note({ id, title, content, createAt }: Props) {
+   const { renderMenu, onContextMenu } = useNotesPopup() 
    const pathname = usePathname()
+   const noteRef = useRef<HTMLLIElement>(null)
+
    const date = new Date(createAt).toLocaleDateString()
    const href = `/note-${id}`
-
+   
    return(
-      <li className={"px-3 py-1 rounded-lg" + 
-         `${(pathname === href) ? ' bg-light-brown' : ''}`
-      }>
+      <li 
+         className={"px-3 py-1 rounded-lg" + 
+            `${(pathname === href) ? ' bg-light-brown' : ''}`
+         }
+         ref={noteRef}
+         onContextMenu={(event) => onContextMenu(event, id)}
+      >
          <Link 
             className="w-full text-start"
             href={href}
@@ -29,11 +40,24 @@ export default function Note({ id, title, content, createAt }: Props) {
                   {date}
                </span>      
                
-               <span className="ml-1 text-gray-400">
+               <span className={"ml-1" + 
+                  `${(pathname === href) ? ' text-white opacity-65' : ' text-gray-400'}`
+               }>
                   {content}
                </span>
             </p>
          </Link>
+         
+
+         <RenderModal>
+            {
+               (renderMenu.render && renderMenu.noteId === id) && 
+               <NotesPopup mousePoisiton={{ 
+                  x: renderMenu.mousePosition.x,
+                  y: renderMenu.mousePosition.y
+               }}/>
+            }
+         </RenderModal>
       </li>
    )
 }
