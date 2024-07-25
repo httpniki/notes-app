@@ -3,7 +3,12 @@
 import filterNotesByElapsedTime from '@/lib/filterNotesByElapsedTime'
 import fetchNotes from '@/lib/localStorage/fetchNotes'
 import saveNote from '@/lib/localStorage/saveNote'
-import type { ContextProps, ContextValue, FilteredNotesByElapsedTime, UpdateNoteFields } from '@/types/context/notesContext'
+import type { 
+   ContextProps, 
+   ContextValue, 
+   FilteredNotesByElapsedTime, 
+   UpdateNoteFields 
+} from '@/types/context/notesContext'
 import type { Note } from '@/types/note'
 import React, { useEffect, useState } from 'react'
 import { v4 as uuid } from 'uuid'
@@ -70,13 +75,28 @@ export default function NotesContextProvider({ children }: ContextProps) {
       getNotes()
    }
 
+   function deleteNote(id: Note['id']) {
+      let updatedNotes = {} as FilteredNotesByElapsedTime
+
+      for(const key in notes) {
+         const filter = notes[key as keyof FilteredNotesByElapsedTime]
+         const updatedFilter = filter.filter(el => el.id !== id)
+
+         Object.assign(updatedNotes, { [key]: updatedFilter })
+      }
+
+      return setNotes(updatedNotes)
+   }
+
+
    return(
       <notesContext.Provider 
          value={{
             notes,
             createNote,
             getNote,
-            updateNote
+            updateNote,
+            deleteNote
          }}>
          {children}
       </notesContext.Provider>

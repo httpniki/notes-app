@@ -22,6 +22,7 @@ export interface ContextValue {
    createNote: () => void
    getNote: (id: Note['id'] | Note['title']['content']) => Note | null
    updateNote: (id: Note['id'] | Note['title']['content'], fields: UpdateNoteFields) => void
+   deleteNote: (id: Note['id']) => void
 }
 
 export interface ContextProps {

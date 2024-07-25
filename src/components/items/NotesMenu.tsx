@@ -1,3 +1,4 @@
+import useNotes from "@/hooks/useNotes"
 import useNotesMenu from "@/hooks/useNotesMenu"
 
 interface Props {
@@ -9,6 +10,7 @@ interface Props {
 
 export default function NotesMenu({ mousePoisiton }: Props) {
    const { noteId } = useNotesMenu()
+   const { deleteNote } = useNotes()
 
    return(
       <div 
@@ -21,6 +23,7 @@ export default function NotesMenu({ mousePoisiton }: Props) {
          </button>
          <button 
             className="w-full px-4 text-start text-sm text-white hover:bg-black/10 py-1"
+            onClick={() => deleteNote(noteId as string)}
          >
             Delete
          </button> 
