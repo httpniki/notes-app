@@ -16,9 +16,7 @@ export default function Note() {
    useEffect(() => {
       if(!notes) return
       const notePathID = path.split('/note-')[1] 
-      const note = getNote(notePathID)
-   
-      setNote(note)
+      setNote(getNote(notePathID))
    },[notes])
 
    function handleUpdateNote(data: UpdateNoteFields) {
