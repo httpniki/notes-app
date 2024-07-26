@@ -2,6 +2,29 @@ import { FilteredNotesByElapsedTime } from "@/types/context/notesContext";
 import type { Note } from "@/types/note";
 import { DateTime } from 'luxon'
 
+function sortNotes(notes: FilteredNotesByElapsedTime) {
+   const sortedNotes = {} as FilteredNotesByElapsedTime
+   
+   for(const key in notes) {
+      const filter = notes[key as keyof FilteredNotesByElapsedTime]
+
+      const sortedArray = filter.sort((a, b) => {
+         const dateA = new Date(a.createAt).getTime()
+         const dateB = new Date(b.createAt).getTime()
+
+         if(dateA > dateB) return -1
+         return 1
+      })
+
+      Object.assign(
+         sortedNotes, 
+         { [key]: sortedArray }
+      )
+   }
+
+   return sortedNotes
+}
+
 export default function filterNotesByElapsedTime(notes: Note[]): FilteredNotesByElapsedTime {
    const filteredNotes: FilteredNotesByElapsedTime = {
       today: [],
@@ -28,5 +51,5 @@ export default function filterNotesByElapsedTime(notes: Note[]): FilteredNotesBy
       return filteredNotes.older.push(note)
    })
 
-   return filteredNotes
+   return sortNotes(filteredNotes)
 }
