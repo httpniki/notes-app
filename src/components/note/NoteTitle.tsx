@@ -9,14 +9,14 @@ import Picker from '@emoji-mart/react'
 interface Props {
    title: Note['title']['content']
    emoji: Note['title']['emoji']
-   handleUpdateNote: (data: UpdateNoteFields) => void
+   onUpdateNote: (data: UpdateNoteFields) => void
 }
 
-export default function NoteTitle({ title, emoji, handleUpdateNote }: Props) {
+export default function NoteTitle({ title, emoji, onUpdateNote }: Props) {
    const [openEmojiPicker, setOpenEmojiPicker] = useState(false)
 
    function onSelectEmoji(emoji: Note['title']['emoji']) {
-      handleUpdateNote({ title: { emoji } })
+      onUpdateNote({ title: { emoji } })
       return setOpenEmojiPicker(false)
    }
 
@@ -35,7 +35,7 @@ export default function NoteTitle({ title, emoji, handleUpdateNote }: Props) {
                type="text" 
                placeholder="Your title here..."
                defaultValue={title}
-               onChange={(event) => handleUpdateNote({ title: { content: event.target.value } })}
+               onChange={(event) => onUpdateNote({ title: { content: event.target.value } })}
             />
 
             <div className="absolute top-16">

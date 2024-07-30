@@ -28,7 +28,7 @@ export default function Note({ id, title, content, createAt }: Props) {
             className="w-full text-start"
             href={href}
          >
-            <h6 className="text-md flex font-bold">
+            <h6 className="text-sm flex font-bold">
                <span>{title.emoji}</span>
                <span className="ml-1 text-ellipsis overflow-hidden">
                   {title.content}

@@ -5,8 +5,9 @@ import type { Note as NoteType } from "@/types/note"
 import { usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
 import NoteTitle from "./NoteTitle"
-import { UpdateNoteFields } from "@/types/context/notesContext"
+import type { UpdateNoteFields } from "@/types/context/notesContext"
 import createNoteDate from "@/lib/createNoteDate"
+import Content from "./Content"
 
 export default function Note() {
    const path = usePathname()
@@ -19,7 +20,7 @@ export default function Note() {
       setNote(getNote(notePathID))
    },[notes])
 
-   function handleUpdateNote(data: UpdateNoteFields) {
+   function onUpdateNote(data: UpdateNoteFields) {
       return updateNote((note as NoteType).id, data)
    }
 
@@ -36,14 +37,12 @@ export default function Note() {
                <NoteTitle
                   title={note.title.content}
                   emoji={note.title.emoji}
-                  handleUpdateNote={handleUpdateNote}
+                  onUpdateNote={onUpdateNote}
                />
-
-               <textarea 
-                  className="bg-brown overflow-clip text-sm flex-1 mt-4 text-white focus:outline-none"
-                  placeholder="Start writing..."
-                  onChange={({ target }) => handleUpdateNote({ content: target.value })}
-                  defaultValue={note.content}
+               
+               <Content 
+                  content={note.content}
+                  onUpdateNote={(content) => onUpdateNote({ content })}
                />
             </>
          }
