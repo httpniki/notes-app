@@ -1,5 +1,6 @@
 import useNotes from "@/hooks/useNotes"
 import useNotesMenu from "@/hooks/useNotesMenu"
+import type { Note } from "@/types/note"
 
 interface Props {
    mousePoisiton: {
@@ -9,8 +10,18 @@ interface Props {
 }
 
 export default function NotesMenu({ mousePoisiton }: Props) {
-   const { noteId } = useNotesMenu()
-   const { deleteNote } = useNotes()
+   const { note } = useNotesMenu()
+   const { deleteNote, updateNote } = useNotes()
+
+   function onDeleteNote() {
+      if(!note) return
+      return deleteNote(note.id)
+   }
+
+   function onPinNote()  {
+      if(!note) return
+      updateNote(note.id, { pinned: !note.pinned })
+   }
 
    return(
       <div 
@@ -18,12 +29,15 @@ export default function NotesMenu({ mousePoisiton }: Props) {
          style={{ translate: `${mousePoisiton.x}px ${mousePoisiton.y}px` }}
          data-context-menu
       >
-         <button className="w-full px-4 text-start text-sm text-white hover:bg-black/10 py-1">
+         <button 
+            onClick={onPinNote}
+            className="w-full px-4 text-start text-sm text-white hover:bg-black/10 py-1"
+         >
             Pin
          </button>
          <button 
             className="w-full px-4 text-start text-sm text-white hover:bg-black/10 py-1"
-            onClick={() => deleteNote(noteId as string)}
+            onClick={onDeleteNote}
          >
             Delete
          </button> 

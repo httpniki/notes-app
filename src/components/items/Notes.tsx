@@ -10,6 +10,11 @@ export default function Notes() {
    return(
       <NotesMenuProvider>
          <FilterNoteBy 
+            title="Pinned"
+            notes={notes.pinned}
+         />
+
+         <FilterNoteBy 
             title="Today"
             notes={notes.today}
          />
@@ -20,14 +25,14 @@ export default function Notes() {
          />
  
          <FilterNoteBy 
-            title="Last Month"
-            notes={notes.lastMonth}
-         />
-
-         <FilterNoteBy 
             title="Previous 7 days"
             notes={notes.previous7Days}
-         />        
+         />      
+
+         <FilterNoteBy 
+            title="Last Month"
+            notes={notes.lastMonth}
+         />  
 
          <FilterNoteBy 
             title="Older"

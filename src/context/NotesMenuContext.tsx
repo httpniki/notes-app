@@ -1,10 +1,10 @@
 'use client'
 
+import useNotes from "@/hooks/useNotes";
 import type { Note } from "@/types/note";
 import React, { ReactNode, useEffect, useState } from "react";
 
 interface RenderMenuState {
-   noteId: Note['id'] | null
    render: boolean
    mousePosition: {
       x: number
@@ -13,7 +13,7 @@ interface RenderMenuState {
 }
 
 interface ContextValue {
-   noteId: RenderMenuState['noteId']
+   note: Note | null
    renderMenu: RenderMenuState
    onContextMenu: (event: any, id: Note['id']) => void
 }
@@ -21,8 +21,9 @@ interface ContextValue {
 export const notesMenuContext = React.createContext<ContextValue | null>(null)
 
 export default function NotesMenuProvider({ children }: { children: ReactNode }) {
+   const { getNote } = useNotes()
+   const [note, setNote] = useState<Note | null>(null)
    const [renderMenu, setRenderMenu] = useState<RenderMenuState>({ 
-      noteId: null,
       render: false, 
       mousePosition: { x: 0, y: 0 } 
    })
@@ -30,10 +31,11 @@ export default function NotesMenuProvider({ children }: { children: ReactNode })
    useEffect(() => {
       function closeMenu() {
          setRenderMenu({
-            noteId: null,
             render: false,
             mousePosition: { x: 0, y: 0 }
          })
+
+         setNote(null)
       }
    
       document.addEventListener('click', closeMenu)
@@ -44,15 +46,17 @@ export default function NotesMenuProvider({ children }: { children: ReactNode })
       event.preventDefault()
 
       setRenderMenu({
-         noteId: id,
          render: true,
          mousePosition: { x: event.clientX, y: event.clientY }
       })
+      
+      const note = getNote(id)
+      setNote(note)
    }
 
    return(
       <notesMenuContext.Provider value={{
-         noteId: renderMenu.noteId,
+         note,
          renderMenu,
          onContextMenu
       }}>

@@ -6,10 +6,10 @@ import NotesPopup from "./NotesMenu"
 import RenderModal from "./RenderModal"
 import useNotesPopup from "@/hooks/useNotesMenu"
 
-interface Props extends NoteType {}
+interface Props extends Pick<NoteType, 'id' | 'title' | 'content' | 'createAt'> {}
 
 export default function Note({ id, title, content, createAt }: Props) {
-   const { renderMenu, onContextMenu } = useNotesPopup() 
+   const { renderMenu, onContextMenu, note } = useNotesPopup() 
    const pathname = usePathname()
    const noteRef = useRef<HTMLLIElement>(null)
 
@@ -47,11 +47,10 @@ export default function Note({ id, title, content, createAt }: Props) {
                </span>
             </p>
          </Link>
-         
 
          <RenderModal>
             {
-               (renderMenu.render && renderMenu.noteId === id) && 
+               (renderMenu.render && note?.id === id) && 
                <NotesPopup mousePoisiton={{ 
                   x: renderMenu.mousePosition.x,
                   y: renderMenu.mousePosition.y

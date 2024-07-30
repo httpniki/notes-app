@@ -27,6 +27,7 @@ function sortNotes(notes: FilteredNotesByElapsedTime) {
 
 export default function filterNotesByElapsedTime(notes: Note[]): FilteredNotesByElapsedTime {
    const filteredNotes: FilteredNotesByElapsedTime = {
+      pinned: [],
       today: [],
       yesterday: [],
       previous7Days: [],
@@ -43,6 +44,7 @@ export default function filterNotesByElapsedTime(notes: Note[]): FilteredNotesBy
 
       const elapsedTime = Number(elapsedDayString)
 
+      if(note.pinned) return filteredNotes.pinned.push(note)
       if(elapsedTime === 0) return filteredNotes.today.push(note)
       if(elapsedTime === 1) return filteredNotes.yesterday.push(note)
       if(elapsedTime > 1 && elapsedTime <= 7) return filteredNotes.previous7Days.push(note)

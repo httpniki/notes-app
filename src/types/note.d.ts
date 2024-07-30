@@ -6,4 +6,5 @@ export interface Note {
    }
    content: string
    createAt: string
+   pinned: boolean
 }

@@ -7,9 +7,11 @@ export interface UpdateNoteFields {
       emoji?: Note['title']['emoji']
    }
    content?: string
+   pinned?: boolean
 }
 
 export interface FilteredNotesByElapsedTime {
+   pinned: Note[]
    today: Note[]
    yesterday: Note[]
    previous7Days: Note[]

@@ -18,6 +18,7 @@ export const notesContext = React.createContext<ContextValue | null>(null)
 
 export default function NotesContextProvider({ children }: ContextProps) {
    const [notes, setNotes] = useState<FilteredNotesByElapsedTime>({ 
+      pinned: [],
       today: [], 
       yesterday: [], 
       previous7Days: [], 
@@ -30,6 +31,7 @@ export default function NotesContextProvider({ children }: ContextProps) {
    function getNotes() {
       const notes = fetchNotes()
       const filteredNotes = filterNotesByElapsedTime(notes)
+
       setNotes(filteredNotes)
    }
 
@@ -41,7 +43,8 @@ export default function NotesContextProvider({ children }: ContextProps) {
             emoji: '📝'
          },
          content: '',
-         createAt: new Date().toUTCString()
+         createAt: new Date().toUTCString(),
+         pinned: false
       }
 
       setNotes({ ...notes, today: [...notes.today, newNote] })
@@ -71,6 +74,7 @@ export default function NotesContextProvider({ children }: ContextProps) {
       if(fields.title?.content) note.title.content = fields.title.content
       if(fields.title?.emoji) note.title.emoji = fields.title.emoji
       if(fields.content) note.content = fields.content
+      if(typeof fields.pinned === 'boolean') note.pinned = fields.pinned
 
       saveNote(note)
       getNotes()

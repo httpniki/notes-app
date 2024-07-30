@@ -2,7 +2,7 @@ import { Note as NoteType } from "@/types/note"
 import Note from "./Note"
 
 interface Props {
-   title: 'Today' | 'Yesterday' | 'Previous 7 days' | 'Last Month'| 'Older'
+   title: 'Pinned'| 'Today' | 'Yesterday' | 'Previous 7 days' | 'Last Month'| 'Older' 
    notes: NoteType[]
 }
 
