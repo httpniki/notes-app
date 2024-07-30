@@ -12,6 +12,7 @@ import type {
 import type { Note } from '@/types/note'
 import React, { useEffect, useState } from 'react'
 import { v4 as uuid } from 'uuid'
+import removeNote from '@/lib/localStorage/deleteNote'
 
 export const notesContext = React.createContext<ContextValue | null>(null) 
 
@@ -84,7 +85,8 @@ export default function NotesContextProvider({ children }: ContextProps) {
 
          Object.assign(updatedNotes, { [key]: updatedFilter })
       }
-
+   
+      removeNote(id)
       return setNotes(updatedNotes)
    }
 
