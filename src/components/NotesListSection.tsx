@@ -1,8 +1,8 @@
 import SearchSVG from "./assets/SearchSVG";
 import CreateNoteButton from "./items/CreateNoteButton";
-import Notes from "./items/Notes";
+import NoteList from "./items/NoteList";
 
-export default function NotesItemsSection() {
+export default function NotesListSection() {
    return(
       <section className="overflow-auto flex flex-col h-screen sticky top-0 px-2 py-4 w-64 border-r border-white">
          <label className="flex w-full gap-2 mb-4 px-1">
@@ -24,7 +24,7 @@ export default function NotesItemsSection() {
          </div>
 
          <ul className="flex flex-col mt-1 text-white">
-            <Notes/>
+            <NoteList/>
          </ul>
       </section>
    )

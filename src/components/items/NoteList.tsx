@@ -4,7 +4,7 @@ import useNotes from "@/hooks/useNotes"
 import FilterNoteBy from "./FilterNoteBy"
 import NotesMenuProvider from "@/context/NotesMenuContext"
 
-export default function Notes() {
+export default function NoteList() {
    const { notes } = useNotes()
    
    return(
