@@ -18,6 +18,7 @@ export const notesContext = React.createContext<ContextValue | null>(null)
 
 export default function NotesContextProvider({ children }: ContextProps) {
    const [notes, setNotes] = useState<FilteredNotesByElapsedTime>({ 
+      search: [],
       pinned: [],
       today: [], 
       yesterday: [], 
@@ -25,14 +26,42 @@ export default function NotesContextProvider({ children }: ContextProps) {
       lastMonth: [],
       older: [] 
    })
+   const [searchParams, setSearchParams] = useState('')
 
    useEffect(getNotes, [])
+   useEffect(searchNote, [searchParams])
+
+   function searchNote() {
+      if(!searchParams) return  
+      const findedNotes: Note[] = []
+
+      for(const key in notes) {
+         const filter = notes[key as keyof FilteredNotesByElapsedTime] 
+
+         filter.map(note => {
+            if(!note) return
+
+            if(findedNotes.some(el => el.id === note.id)) return
+
+            const conditions = [
+               note.title.content.includes(searchParams),
+               note.content.includes(searchParams)
+            ]
+
+            if(conditions.some(el => el === true)) findedNotes.push(note)
+         })
+      }
+
+      setNotes((prevState) => {
+         return { ...prevState, search: findedNotes }
+      })
+   }
 
    function getNotes() {
       const notes = fetchNotes()
       const filteredNotes = filterNotesByElapsedTime(notes)
 
-      setNotes(filteredNotes)
+      setNotes({ ...filteredNotes, search: [] })
    }
 
    function createNote() {
@@ -84,6 +113,8 @@ export default function NotesContextProvider({ children }: ContextProps) {
       let updatedNotes = {} as FilteredNotesByElapsedTime
 
       for(const key in notes) {
+         if(key === "search") return
+
          const filter = notes[key as keyof FilteredNotesByElapsedTime]
          const updatedFilter = filter.filter(el => el.id !== id)
 
@@ -91,7 +122,8 @@ export default function NotesContextProvider({ children }: ContextProps) {
       }
    
       removeNote(id)
-      return setNotes(updatedNotes)
+      setNotes(updatedNotes)
+      setSearchParams("")
    }
 
 
@@ -102,7 +134,9 @@ export default function NotesContextProvider({ children }: ContextProps) {
             createNote,
             getNote,
             updateNote,
-            deleteNote
+            deleteNote,
+            searchParams,
+            setSearchParams
          }}>
          {children}
       </notesContext.Provider>

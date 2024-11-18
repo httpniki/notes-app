@@ -11,6 +11,7 @@ export interface UpdateNoteFields {
 }
 
 export interface FilteredNotesByElapsedTime {
+   search: Note[]
    pinned: Note[]
    today: Note[]
    yesterday: Note[]
@@ -25,6 +26,8 @@ export interface ContextValue {
    getNote: (id: Note['id'] | Note['title']['content']) => Note | null
    updateNote: (id: Note['id'] | Note['title']['content'], fields: UpdateNoteFields) => void
    deleteNote: (id: Note['id']) => void
+   searchParams: string
+   setSearchParams: (value: String) => void
 }
 
 export interface ContextProps {

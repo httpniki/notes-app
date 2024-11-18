@@ -5,6 +5,7 @@ import NotesContextProvider from "@/context/NotesContext";
 import React from "react";
 import NoteSection from "@/components/NoteSection";
 import NotesListSection from "@/components/NotesListSection";
+import NotesMenuProvider from "@/context/NotesMenuContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,13 +22,15 @@ export default function RootLayout({
       <html lang="en">
          <body className={inter.className}>
             <NotesContextProvider>
-               <main className="flex bg-brown w-screen h-screen">
-                  <NotesListSection/>
+               <NotesMenuProvider>
+                  <main className="flex bg-brown w-screen h-screen">
+                     <NotesListSection/>
 
-                  <NoteSection>
-                     {children}
-                  </NoteSection>
-               </main>
+                     <NoteSection>
+                        {children}
+                     </NoteSection>
+                  </main>
+               </NotesMenuProvider>
             </NotesContextProvider>
          </body>
       </html>

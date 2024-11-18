@@ -6,25 +6,25 @@ import NotesPopup from "./NotesMenu"
 import RenderModal from "./RenderModal"
 import useNotesPopup from "@/hooks/useNotesMenu"
 
-interface Props extends Pick<NoteType, 'id' | 'title' | 'content' | 'createAt'> {}
+interface Props extends Pick<NoteType, 'id' | 'title' | 'content' | 'createAt'> { }
 
 export default function Note({ id, title, content, createAt }: Props) {
-   const { renderMenu, onContextMenu, note } = useNotesPopup() 
+   const { renderMenu, onContextMenu, note } = useNotesPopup()
    const pathname = usePathname()
    const noteRef = useRef<HTMLLIElement>(null)
 
    const date = new Date(createAt).toLocaleDateString()
    const href = `/note-${id}`
-   
-   return(
-      <li 
-         className={"px-3 py-1 rounded-lg" + 
+
+   return (
+      <li
+         className={"px-3 py-1 rounded-lg" +
             `${(pathname === href) ? ' bg-light-brown' : ''}`
          }
          ref={noteRef}
          onContextMenu={(event) => onContextMenu(event, id)}
       >
-         <Link 
+         <Link
             className="w-full text-start"
             href={href}
          >
@@ -38,9 +38,9 @@ export default function Note({ id, title, content, createAt }: Props) {
             <p className="text-sm whitespace-nowrap overflow-hidden text-ellipsis">
                <span className="text-[0.8125rem]">
                   {date}
-               </span>      
-               
-               <span className={"ml-1" + 
+               </span>
+
+               <span className={"ml-1" +
                   `${(pathname === href) ? ' text-white opacity-65' : ' text-gray-400'}`
                }>
                   {content}
@@ -50,11 +50,11 @@ export default function Note({ id, title, content, createAt }: Props) {
 
          <RenderModal>
             {
-               (renderMenu.render && note?.id === id) && 
-               <NotesPopup mousePoisiton={{ 
+               (renderMenu.render && note?.id === id) &&
+               <NotesPopup mousePoisiton={{
                   x: renderMenu.mousePosition.x,
                   y: renderMenu.mousePosition.y
-               }}/>
+               }} />
             }
          </RenderModal>
       </li>
