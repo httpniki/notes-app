@@ -9,8 +9,8 @@ const config: Config = {
    theme: {
       extend: {
          colors: {
-            "brown": '#1c1c1c',
-            "light-brown": '#9d7d28'
+            "brown": 'var(--brown-color)',
+            "light-brown": 'var(--light-brown-color)'
          }
       },
    },

@@ -2,7 +2,48 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+   --brown-color: #1c1c1c;
+   --light-brown-color: #9d7d28;
+}
+
 textarea {
    field-sizing: content;
    resize: none;
+}
+
+#note-content h1, h2, h3, h4, h5, h6 {
+   font-weight: bold;
+}
+
+#note-content h1 {
+   font-size: 1.5em;
+}
+
+#note-content h2 {
+   font-size: 1.3em;
+}
+
+#note-content h3 {
+   font-size: 1.17em;
+}
+
+#note-content h4 {
+   font-size: 1em;
+}
+
+#note-content h5 {
+   font-size: 0.83em;
+}
+
+#note-content h6  {
+   font-size: 0.67em;
+}
+
+#note-content ul {
+   list-style: inside;
+}
+
+#note-content a {
+   color: #e2a727;
 }
