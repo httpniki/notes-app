@@ -44,8 +44,8 @@ export default function NotesContextProvider({ children }: ContextProps) {
             if(findedNotes.some(el => el.id === note.id)) return
 
             const conditions = [
-               note.title.content.includes(searchParams),
-               note.content.includes(searchParams)
+               note.title.content.toString().includes(searchParams.toString()),
+               note.content.toString().includes(searchParams.toString())
             ]
 
             if(conditions.some(el => el === true)) findedNotes.push(note)
