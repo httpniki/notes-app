@@ -10,7 +10,7 @@ import NotesMenuProvider from "@/context/NotesMenuContext";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-   title: "Notes",
+   title: "Notes 📝",
 };
 
 export default function RootLayout({
