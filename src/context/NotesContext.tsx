@@ -125,7 +125,7 @@ export default function NotesContextProvider({ children }: ContextProps) {
             updateNote,
             deleteNote,
             searchParams,
-            setSearchParams
+            setSearchParams: setSearchParams as ContextValue['setSearchParams'] ,
          }}>
          {children}
       </notesContext.Provider>
