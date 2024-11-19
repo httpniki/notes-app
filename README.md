@@ -1,1 +1,1 @@
-# Snap Notes 📝
+# Notes 📝
