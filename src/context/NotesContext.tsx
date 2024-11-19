@@ -76,8 +76,8 @@ export default function NotesContextProvider({ children }: ContextProps) {
          pinned: false
       }
 
-      setNotes({ ...notes, today: [...notes.today, newNote] })
       saveNote(newNote)
+      getNotes()
    }
 
    function getNote(id: Note['id']): Note | null {
