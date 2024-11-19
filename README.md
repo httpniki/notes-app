@@ -1,1 +1,1 @@
-# Notes 📝
+# Notes App📝
