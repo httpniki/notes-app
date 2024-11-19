@@ -110,19 +110,8 @@ export default function NotesContextProvider({ children }: ContextProps) {
    }
 
    function deleteNote(id: Note['id']) {
-      let updatedNotes = {} as FilteredNotesByElapsedTime
-
-      for(const key in notes) {
-         if(key === "search") return
-
-         const filter = notes[key as keyof FilteredNotesByElapsedTime]
-         const updatedFilter = filter.filter(el => el.id !== id)
-
-         Object.assign(updatedNotes, { [key]: updatedFilter })
-      }
-   
       removeNote(id)
-      setNotes(updatedNotes)
+      getNotes()
       setSearchParams("")
    }
 
